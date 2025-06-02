@@ -1,0 +1,134 @@
+<!-- Clone by https://www.facebook.com/CLONE.LEVIETCONG -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Viết Công ❤️</title>
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/css/app.css" />
+    <style>
+      #falling-images {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1000;
+      }
+      .falling-image {
+        position: absolute;
+        top: -100px;
+        width: 100px;
+        height: auto;
+        animation: falling linear forwards;
+      }
+      @keyframes falling {
+        0% {
+          transform: translateY(-100px) rotate(0deg);
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <div id="falling-images"></div>
+    <div
+      id="app"
+      data-page='{
+        "component": "views/home",
+        "props": {
+          "errors": {},
+          "name": "Viết Công ❤️",
+          "quote": {
+            "message": "",
+            "author": ""
+          },
+          "auth": {
+            "user": null
+          },
+          "ziggy": {
+            "port": null,
+            "defaults": [],
+            "routes": {
+              "home": {
+                "uri": "/",
+                "methods": ["GET", "HEAD"]
+              },
+              "show-create-form": {
+                "uri": "create-message/{id?}",
+                "methods": ["GET", "HEAD"],
+                "parameters": ["id"]
+              },
+              "create-form": {
+                "uri": "create-message",
+                "methods": ["POST"]
+              },
+              "login": {
+                "uri": "login",
+                "methods": ["GET", "HEAD"]
+              },
+              "logout": {
+                "uri": "logout",
+                "methods": ["POST"]
+              },
+              "storage.local": {
+                "uri": "storage/{path}",
+                "methods": ["GET", "HEAD"],
+                "wheres": {
+                  "path": ".*"
+                },
+                "parameters": ["path"]
+              }
+            },
+            "location": ""
+          },
+          "message": "./image/image.jpg",
+          "client": {
+            "fontName": "Mali",
+            "color": "#ff0019",
+            "messages": [
+            "I Love You ❤️.",
+            "Cảm ơn anh vì đã đến bên em."
+            ],
+            "music": "./music/Music.mp3"
+          },
+          "clientId": "/"
+        },
+        "url": "/",
+        "version": "",
+        "clearHistory": false,
+        "encryptHistory": false
+      }
+      '
+    >
+  </div>
+  <script type="module" src="/static/js/app.js"></script>
+  <script type="module" src="/static/js/home.js"></script>
+  <script>
+    const images = [
+      './image/anh1.jpg'
+    ];
+
+    function createFallingImage() {
+      const img = document.createElement('img');
+      img.className = 'falling-image';
+      img.src = images[Math.floor(Math.random() * images.length)];
+      img.style.left = Math.random() * 100 + 'vw';
+      img.style.animationDuration = Math.random() * 3 + 2 + 's';
+      img.style.opacity = Math.random() * 0.5 + 0.5;
+      img.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+      document.getElementById('falling-images').appendChild(img);
+      
+      setTimeout(() => {
+        img.remove();
+      }, 5000);
+    }
+
+    setInterval(createFallingImage, 500);
+  </script>
+  </body>
+</html>
